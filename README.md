@@ -1,13 +1,10 @@
-# Sample Hardhat Project
+# Refs
+Github
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+https://github.com/openreachtech/solidity-training/tree/main/part5
 
-Try running some of the following tasks:
+Youtube
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+https://www.youtube.com/watch?v=lJN0a0gUtTY
+
+#
