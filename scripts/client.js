@@ -68,25 +68,9 @@ const sign = async (lib, hash) => {
   return {r, s, v, sender};
 }
 
-const run = async (lib) => {
+const run = async (lib, fragment, params) => {
   const relayer = await deploy("Relayer")
   const memberList = await deploy("MemberList", (await relayer.getAddress()))
-
-  // interface
-  const fragment = {
-    name: 'regist',
-	  type: 'function',
-	  inputs: [
-      {type: 'string', name: 'name' },
-	  	{type: 'uint8', name: 'age' },
-	  	{type: 'bool', name: 'isMale' },
-	  ]
-	};
-  // params
-  const name = "tom";
-  const age = 21;
-  const isMale = true;
-  const params = [name, age, isMale];
 
   const calldata = makeCalldata(lib, fragment, params)
   const hashedCalldata = hash(lib, calldata)
@@ -101,10 +85,21 @@ const run = async (lib) => {
 }
 
 async function main() {
-  console.log('----- ', LIB.web3, ' -----')
-  await run(LIB.web3);
-  console.log('----- ', LIB.ethers, ' -----')
-  await run(LIB.ethers)
+	// interface
+	const fragment = {
+		name: 'regist',
+		type: 'function',
+		inputs: [
+			{ type: 'string', name: 'name' },
+			{ type: 'uint8', name: 'age' },
+			{ type: 'bool', name: 'isMale' },
+		],
+	};
+
+	console.log('----- ', LIB.web3, ' -----');
+	await run(LIB.web3, fragment, ['web3', 21, true]);
+	console.log('----- ', LIB.ethers, ' -----');
+	await run(LIB.ethers, fragment, ['ethers', 27, false]);
 };
 
 main().catch((error) => {
